@@ -10,9 +10,11 @@ import (
 
 func main() {
 	router := gin.Default()
-
 	models.ConnectDatabase()
+	router.LoadHTMLGlob("Views/*.html")
+	router.Static("/css", "Views/css")
 
+	router.GET("/", controllers.Home)
 	router.POST("/users", controllers.Signup)
 	router.POST("/users/login", controllers.Login)
 	router.GET("/users", middleware.CheckAuth, controllers.GetUsers)
