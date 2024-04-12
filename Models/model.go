@@ -1,11 +1,12 @@
 package models
 
+import "gorm.io/gorm"
+
 type Users struct {
-	ID        int    `json:"id" gorm:"primaryKey"`
-	Username  string `json:"username" gorm:"unique"`
-	Password  string `json:"password"`
-	CartID    int    `json:"cart_id"`
-	CreatedAt string `json:"created_at"`
+	gorm.Model
+	Username string `json:"username" unique:"true" binding:"required"`
+	Password string `json:"password" binding:"required"`
+	CartID   int    `json:"cart_id"`
 }
 
 type UsersInput struct {
@@ -14,10 +15,9 @@ type UsersInput struct {
 }
 
 type Items struct {
-	ID        int    `json:"id"`
-	Name      string `json:"name"`
-	Status    string `json:"status"`
-	CreatedAt string `json:"created_at"`
+	gorm.Model
+	Name   string `json:"name"`
+	Status string `json:"status"`
 }
 
 type ItemsInput struct {
@@ -26,9 +26,8 @@ type ItemsInput struct {
 }
 
 type Cart struct {
-	ID        int    `json:"id"`
-	UserID    int    `json:"user_id"`
-	Name      string `json:"name"`
-	Status    string `json:"status"`
-	CreatedAt string `json:"created_at"`
+	gorm.Model
+	UserID int    `json:"user_id"`
+	Name   string `json:"name"`
+	Status string `json:"status"`
 }
